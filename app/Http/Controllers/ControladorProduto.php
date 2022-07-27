@@ -87,7 +87,13 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = $request->produto;
+        $categoria = $request->categoria;
+        $preco = $request->preco;
+        $stock = $request->stock;
+        $aray = [$id, $produto, $categoria, $preco, $stock];
+        $dado = implode('|', $aray);
+        return $dado;
     }
 
     /**

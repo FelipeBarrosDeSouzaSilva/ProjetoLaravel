@@ -20,8 +20,9 @@
                     
                 </th>
             </tr>
-            <tr>
+            <tr id="titulosDados">
                 <th>Código</th>
+                <th>Produto</th>
                 <th>Categoria</th>
                 <th>Preço</th>
                 <th>Stock</th>
@@ -39,12 +40,13 @@
                  @foreach ($dados["prod"] as $prod)
                     <tr id="{{$prod->id}}">
                             <td>{{$prod->id}}</td>
+                            <td>{{$prod->nome}}</td>
                             <td>{{$prod->categoria_id}}</td>
-                            <td>R$ {{$prod->preco}}</td>
+                            <td>{{$prod->preco}}</td>
                             <td>{{$prod->stock}}</td>
                             <td>
                                 <a class="btn btn-sm btn-danger" onclick="remover({{$prod->id}})">Remover</a>
-                                <a class="btn btn-sm btn-primary" onclick="editar({{$prod->id}})">Editar</a>
+                                <a class="btn btn-sm btn-primary" onclick="abrirForm({{$prod->id}})">Editar</a>
                             </td>
                     </tr>
                 @endforeach
