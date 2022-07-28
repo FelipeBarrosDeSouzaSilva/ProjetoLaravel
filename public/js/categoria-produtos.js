@@ -33,18 +33,43 @@ function remover(id){
 }
 function abrirForm(id){
     let dados =  $('tr#'+ id + ' td');
-
     let titulosDados = $('#titulosDados th');
+
+    let idCategoria = $('tr#'+ id + ' td')[2].textContent;
 
     for(var i = 1;i < (dados.length - 1); i++){
         let tableUpdate = $('tr#'+ id + ' td')[i];
-        let input = document.createElement('input');
-        let classe = 'input absolute form-control';
-        input.placeholder = 'Editar ' + titulosDados[i].textContent;
-        input.value = dados[i].textContent;
-        input.id = 'updateProduto_' + i
-        tableUpdate.textContent = "";
-        dados[i].append(input);
+        if(i !== 2){
+            let input = document.createElement('input');
+            let classe = 'input absolute form-control';
+            input.placeholder = 'Editar ' + titulosDados[i].textContent;
+            input.value = dados[i].textContent;
+            input.id = 'updateProduto_' + i
+            tableUpdate.textContent = "";
+            dados[i].append(input);
+        }else{
+            $('tr#'+ id + ' td')[2].innerHTML = '';
+            let select = document.createElement('select');
+            select.id = 'updateProduto_'+id;
+            let categorias;
+            dados[2].append(select);
+            $('#updateProduto_'+id).attr('class', 'form-control');
+            let trCategoria =  $('tr#'+ id + ' select#updateProduto_'+id);
+            $('#selectcategoria option').each(function(index, element) {
+                categorias += "<option value='" +
+                element.value +
+            "'>" + 
+                element.innerHTML + 
+            "</option>";
+
+                console.log(categorias);
+              })
+              trCategoria.html(
+                categorias      
+              );
+              $('#updateProduto_'+id).val(idCategoria);
+        }
+        $('td input').attr('class', 'form-control');
     };
     let ultimaPosicaoColuna = $('tr#'+ id + ' td');
     ultimaPosicaoColuna[dados.length - 1].innerHTML = 
@@ -54,8 +79,8 @@ function abrirForm(id){
 }
 function editar(id){
     let dados =  $('tr#'+ id + ' td');
-    let produto = $('#updateProduto_1').val();
-    let categoria = $('#updateProduto_2').val();
+    let nome = $('#updateProduto_1').val();
+    let categoria = $('#updateProduto_'+id).val();
     let preco = $('#updateProduto_3').val();
     let stock = $('#updateProduto_4').val();
     $.ajaxSetup({
@@ -66,7 +91,7 @@ function editar(id){
     $.ajax({
         type: 'POST',
         url: 'http://localhost/cadastro/public/editProduto/'+id,
-       data: {id, produto, categoria, preco, stock},
+       data: {id, nome, categoria, preco, stock},
         success: (retorno)=>{
             let dados = retorno.split('|')
             $('#'+id).remove();
@@ -83,9 +108,10 @@ function editar(id){
                 + "</td>" +
                 "</tr>"
             ;
+            alert(dado[1])
         },
-        error: ()=>{
-            alert('erro id(' + id + ')');
+        error: (e)=>{
+            console.log('status erro: ' + e.status);
         }
      });
 }
