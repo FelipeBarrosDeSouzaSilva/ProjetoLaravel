@@ -89,7 +89,7 @@ class ControladorProduto extends Controller
     {
         $request->validate([
             'nome' => 'required',
-            'categorias' => 'required',
+            'categoria' => 'required',
             'preco' => 'required',
             'stock' => 'required',
         ]);
