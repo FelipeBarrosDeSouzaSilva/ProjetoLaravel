@@ -32,6 +32,7 @@ Route::get('/produtos', $caminho.'\ControladorProduto@index')->name('produtos');
 Route::POST('/createProdutos', $caminho.'\ControladorProduto@store')->name('createProdutos');
 route::get('removerProduto/{id}', $caminho.'\ControladorProduto@destroy');
 route::post('editProduto/{id}', $caminho.'\ControladorProduto@update');
+route::get('/buscarProduto', $caminho.'\ControladorProduto@buscar');
 
 #cliente
 route::get('/novoCliente', $caminho.'\ClienteControlador@create')->name('novoCliente');

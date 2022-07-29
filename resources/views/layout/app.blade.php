@@ -16,6 +16,19 @@
         .navbar{
             margin: 20px;
         }
+        tbody{
+            text-align: center;
+        }
+        #buscar{
+            background: url("http://localhost/cadastro/public/img/lupa.png") no-repeat;
+            background-size: 28px;
+            background-position-x: 95%;
+            background-position-y: 50%;
+            border-radius: 20px;
+        }
+        #lupa{
+            width: 1px;
+        }
     </style>
 </head>
 <body>

@@ -128,3 +128,31 @@ function removerCliente(id){
         }
     })
 }
+$('#buscar').keyup(function(e){
+    if(e.keyCode !== 8 && e.keyCode != '32'){
+        let pesquisa = this.value;
+        $.ajaxSetup({
+            headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost/cadastro/public/buscarProduto/',
+            data: {pesquisa},
+            success: retorno => {
+                for(var i = 0; i < retorno.length; i++){
+                    let id = retorno[i]['id'];
+                    $('#'+id).attr('class', 'bg-warning h5');
+                    console.log(id);
+                }
+                console.log(retorno.length)
+            },
+            error: ()=>{
+                console.log('erro');
+            }
+        });
+    }else if(e.keyCode == 8){
+        $('tbody tr').attr('class', 'bg-white').removeClass('h5');
+    }
+})

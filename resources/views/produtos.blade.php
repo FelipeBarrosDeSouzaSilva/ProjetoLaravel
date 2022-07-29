@@ -6,18 +6,15 @@
         <table class="table table-ordered">
             <tr>
                 <th>
-                    <select name="selectcategoria" id="selectcategoria" class="form-control text-white bg-primary">
-                            <option class="bg-white text-primary" value="">Listar categorias</option>
+                    <select name="selectcategoria" id="selectcategoria" class="form-control text-white bg-primary col-sm-12">
+                            <option class="bg-white text-primary px-2 w-100" value="">Selecionar categorias</option>
                             @foreach ($dados["cat"] as $key)
                                <option class="bg-white text-primary" value="{{ $key->id }}">{{ $key->nome }}</option>
                             @endforeach
                     </select>
                 </th>
-                <th id="cod_cat">
-                    
-                </th>
-                <th id="nome_cat">
-                    
+                <th id="busca">
+                    <label  style="position: absolute; right:10px">Pesquisar &ensp;<input type="text" placeholder="buscar produto..." class="p-2 border-dark" id="buscar"></label>
                 </th>
             </tr>
             <tr id="titulosDados">

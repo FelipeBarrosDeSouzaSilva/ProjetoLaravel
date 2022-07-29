@@ -66,7 +66,12 @@ class ControladorProduto extends Controller
     {
         //
     }
-
+    public function buscar(Request $request){
+        
+        $produto = new Produtos();
+        $retorno = $produto->Where('nome','like',"%{$request->pesquisa}%")->get();
+        return $retorno;
+    }
     /**
      * Show the form for editing the specified resource.
      *
